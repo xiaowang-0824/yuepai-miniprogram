@@ -1,0 +1,57 @@
+/* pages/pose/pose.wxss */
+
+.cat-tabs {
+  display: flex;
+  white-space: nowrap;
+  padding: 24rpx 32rpx;
+  background-color: var(--card-bg);
+  border-bottom: 1rpx solid var(--border-color);
+}
+
+.cat-tab {
+  display: inline-block;
+  padding: 12rpx 32rpx;
+  margin-right: 16rpx;
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  border-radius: 32rpx;
+}
+
+.cat-tab.active {
+  background-color: var(--primary);
+  color: #FFFFFF;
+}
+
+.pose-list {
+  padding: 24rpx 32rpx;
+  column-count: 2;
+  column-gap: 24rpx;
+}
+
+.pose-card {
+  break-inside: avoid;
+  margin-bottom: 24rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+  background-color: var(--card-bg);
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.pose-img {
+  width: 100%;
+  display: block;
+}
+
+.pose-tip {
+  padding: 20rpx;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+  position: relative;
+  margin-top: -80rpx;
+}
+
+.tip-text {
+  font-size: 24rpx;
+  color: #FFFFFF;
+  line-height: 1.5;
+  text-shadow: 0 1rpx 4rpx rgba(0, 0, 0, 0.5);
+}

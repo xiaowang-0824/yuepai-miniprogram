@@ -1,0 +1,38 @@
+<!--pages/my-orders/my-orders.wxml 我的订单-->
+<view class="page-bg" style="{{pageStyle}}">
+  <!-- 状态Tab -->
+  <scroll-view class="status-tabs" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
+    <view class="status-tab {{currentStatus === '' ? 'active' : ''}}" data-status="" bindtap="switchStatus">全部</view>
+    <view class="status-tab {{currentStatus === item.key ? 'active' : ''}}" wx:for="{{statusList}}" wx:key="key"
+          data-status="{{item.key}}" bindtap="switchStatus">{{item.text}}</view>
+  </scroll-view>
+
+  <!-- 订单列表 -->
+  <view class="order-list" wx:if="{{orders.length > 0}}">
+    <view class="order-card" wx:for="{{orders}}" wx:key="_id" data-id="{{item._id}}" bindtap="goDetail">
+      <view class="order-header">
+        <text class="order-no">订单号：{{item.order_no}}</text>
+        <text class="order-status" style="color:{{theme.accent}}">{{statusMap[item.order_status]}}</text>
+      </view>
+      <view class="order-body">
+        <view class="order-type-tag">
+          <text class="tag">{{typeMap[item.order_type]}}</text>
+        </view>
+        <view class="order-amount">¥{{item.amountYuan}}</view>
+      </view>
+      <view class="order-footer">
+        <text class="order-date">{{item.dateText}}</text>
+        <view class="order-actions" catchtap="">
+          <block wx:if="{{item.order_status === 'pending_payment'}}">
+            <button class="btn-outline mini" data-id="{{item._id}}" catchtap="goPay">去支付</button>
+            <button class="btn-primary mini" data-id="{{item._id}}" catchtap="cancelOrder">取消</button>
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:else>
+    <text>还没有订单～</text>
+  </view>
+</view>

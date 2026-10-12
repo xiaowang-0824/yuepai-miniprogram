@@ -1,0 +1,181 @@
+/* pages/index/index.wxss 首页样式 */
+
+.brand-section {
+  padding: 48rpx 32rpx 32rpx;
+  text-align: center;
+}
+
+.brand-name {
+  font-size: 48rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 8rpx;
+}
+
+.brand-slogan {
+  margin-top: 16rpx;
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  letter-spacing: 2rpx;
+}
+
+/* Banner */
+.banner {
+  width: 100%;
+  height: 420rpx;
+  margin: 16rpx 0;
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+}
+
+.banner-title {
+  position: absolute;
+  left: 32rpx;
+  bottom: 32rpx;
+  color: #FFFFFF;
+  font-size: 28rpx;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.5);
+}
+
+swiper-item {
+  position: relative;
+}
+
+/* 快捷入口 */
+.quick-grid {
+  display: flex;
+  justify-content: space-around;
+  padding: 40rpx 32rpx;
+}
+
+.quick-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quick-icon {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44rpx;
+  color: #FFFFFF;
+}
+
+.quick-text {
+  margin-top: 16rpx;
+  font-size: 26rpx;
+  color: var(--text-primary);
+}
+
+/* 区块通用 */
+.section {
+  padding: 16rpx 32rpx;
+  margin-top: 16rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.more {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+
+/* 热门套餐横滑 */
+.package-scroll {
+  white-space: nowrap;
+  margin: 0 -32rpx;
+  padding-left: 32rpx;
+}
+
+.package-card {
+  display: inline-block;
+  width: 320rpx;
+  margin-right: 24rpx;
+  background-color: var(--card-bg);
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.04);
+}
+
+.package-cover {
+  width: 100%;
+  height: 220rpx;
+}
+
+.package-info {
+  padding: 20rpx;
+}
+
+.package-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.package-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 12rpx;
+}
+
+.package-price {
+  font-size: 30rpx;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.package-duration {
+  font-size: 22rpx;
+  color: var(--text-secondary);
+}
+
+/* 精选作品 */
+.works-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.work-item {
+  width: 48%;
+  margin-bottom: 24rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+  background-color: var(--card-bg);
+}
+
+.work-img {
+  width: 100%;
+  height: 320rpx;
+}
+
+.work-title {
+  padding: 16rpx;
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 底部 */
+.footer {
+  padding: 64rpx 0 48rpx;
+  text-align: center;
+}

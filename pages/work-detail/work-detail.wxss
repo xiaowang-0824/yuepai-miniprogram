@@ -1,0 +1,68 @@
+/* pages/work-detail/work-detail.wxss */
+
+.preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000000;
+}
+
+.back-btn {
+  position: absolute;
+  top: 80rpx;
+  left: 32rpx;
+  width: 64rpx;
+  height: 64rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 56rpx;
+  color: #FFFFFF;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.media {
+  width: 100%;
+  height: 100%;
+}
+
+.info-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 32rpx;
+  padding-bottom: calc(32rpx + env(safe-area-inset-bottom));
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  transition: opacity 0.3s;
+}
+
+.info-bar.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.info-bar .title {
+  color: #FFFFFF;
+  font-size: 32rpx;
+}
+
+.info-bar .desc {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 26rpx;
+  margin-top: 12rpx;
+}
+
+.counter {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 24rpx;
+  margin-top: 16rpx;
+}

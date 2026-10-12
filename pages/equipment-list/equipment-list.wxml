@@ -1,0 +1,28 @@
+<!--pages/equipment-list/equipment-list.wxml 器材列表-->
+<view class="page-bg" style="{{pageStyle}}">
+  <!-- 分类标签 -->
+  <scroll-view class="cat-tabs" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
+    <view class="cat-tab {{currentCat === '' ? 'active' : ''}}" data-cat="" bindtap="switchCat">全部</view>
+    <view class="cat-tab {{currentCat === item ? 'active' : ''}}" wx:for="{{categories}}" wx:key="*this"
+          data-cat="{{item}}" bindtap="switchCat">{{item}}</view>
+  </scroll-view>
+
+  <!-- 器材列表 -->
+  <view class="equip-list" wx:if="{{equipments.length > 0}}">
+    <view class="equip-card {{item.is_locked ? 'locked' : ''}}" wx:for="{{equipments}}" wx:key="_id" data-id="{{item._id}}" bindtap="goDetail">
+      <image class="equip-cover" src="{{item.images[0]}}" mode="aspectFill"></image>
+      <view class="equip-body">
+        <view class="equip-name">{{item.name}}<text class="lock-tag" wx:if="{{item.is_locked}}">已锁定</text></view>
+        <view class="equip-model" wx:if="{{item.brand || item.model}}">{{item.brand}} {{item.model}}</view>
+        <view class="equip-bottom">
+          <view class="equip-price">¥{{item.dailyRentYuan}}<text class="unit">/天</text></view>
+          <view class="equip-deposit">押金 ¥{{item.depositYuan}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:else>
+    <text>暂无可租赁的器材，敬请期待～</text>
+  </view>
+</view>

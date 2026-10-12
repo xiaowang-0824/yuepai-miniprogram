@@ -1,0 +1,64 @@
+/* pages/portfolio-detail/portfolio-detail.wxss */
+
+.header {
+  position: relative;
+}
+
+.cover {
+  width: 100%;
+  height: 480rpx;
+}
+
+.header-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 48rpx 32rpx 32rpx;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+}
+
+.header-info .title {
+  color: #FFFFFF;
+  font-size: 40rpx;
+}
+
+.header-info .desc {
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 12rpx;
+}
+
+.works-section {
+  padding: 32rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 24rpx;
+}
+
+.works-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.work-item {
+  width: 48%;
+  margin-bottom: 24rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.work-img {
+  width: 100%;
+  height: 320rpx;
+}
+
+.empty {
+  padding: 120rpx 0;
+  text-align: center;
+  color: var(--text-secondary);
+}

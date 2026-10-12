@@ -1,0 +1,9 @@
+{
+  "name": "pay",
+  "version": "1.0.0",
+  "description": "沙箱支付与订单档期生成",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

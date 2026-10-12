@@ -1,0 +1,191 @@
+<!--pages/admin/admin.wxml 管理员后台（多Tab）-->
+<view class="page-bg" style="{{pageStyle}}">
+  <!-- Tab 栏 -->
+  <scroll-view class="tab-bar" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
+    <view class="tab-item {{activeTab === item.key ? 'active' : ''}}" wx:for="{{tabs}}" wx:key="key"
+          data-key="{{item.key}}" bindtap="switchTab">{{item.name}}</view>
+  </scroll-view>
+
+  <!-- 内容区 -->
+  <view class="tab-content">
+
+    <!-- ===== 档期日历 ===== -->
+    <block wx:if="{{activeTab === 'schedule'}}">
+      <view class="calendar-header">
+        <view class="cal-nav" bindtap="prevMonth">‹</view>
+        <view class="cal-title">{{calYear}}年{{calMonth}}月</view>
+        <view class="cal-nav" bindtap="nextMonth">›</view>
+      </view>
+      <view class="calendar">
+        <view class="week-row">
+          <view class="week-cell" wx:for="{{weeks}}" wx:key="*this">{{item}}</view>
+        </view>
+        <view class="day-grid">
+          <view class="day-cell {{item.today ? 'today' : ''}}" wx:for="{{calDays}}" wx:key="date">
+            <view class="day-num">{{item.day}}</view>
+            <view class="day-marks" wx:if="{{item.marks.length}}">
+              <view class="mark mark-photo" wx:for="{{item.marks}}" wx:for-item="m" wx:key="idx" wx:if="{{m.type === 'photo'}}"></view>
+              <view class="mark mark-equip" wx:for="{{item.marks}}" wx:for-item="m" wx:key="idx" wx:if="{{m.type === 'equipment'}}"></view>
+              <view class="mark mark-block" wx:for="{{item.marks}}" wx:for-item="m" wx:key="idx" wx:if="{{m.type === 'block'}}"></view>
+              <view class="mark mark-lock" wx:for="{{item.marks}}" wx:for-item="m" wx:key="idx" wx:if="{{m.type === 'equip_lock'}}"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="legend">
+        <text class="legend-item"><view class="dot dot-photo"></view>拍摄</text>
+        <text class="legend-item"><view class="dot dot-equip"></view>器材</text>
+        <text class="legend-item"><view class="dot dot-block"></view>封锁</text>
+        <text class="legend-item"><view class="dot dot-lock"></view>锁定</text>
+      </view>
+      <view class="action-row">
+        <button class="btn-primary mini" bindtap="addManualSchedule">+ 线下档期</button>
+        <button class="btn-outline mini" bindtap="addBlockSchedule">+ 封锁日期</button>
+        <button class="btn-outline mini" bindtap="addEquipLock">+ 锁定器材</button>
+      </view>
+
+      <!-- 封锁弹窗 -->
+      <view class="modal-mask" wx:if="{{showBlockModal}}" bindtap="closeModal">
+        <view class="modal-box" catchtap="">
+          <view class="modal-title">添加封锁日期</view>
+          <view class="form-row"><text>开始日期</text><picker mode="date" value="{{blockForm.start_date}}" bindchange="onBlockStartChange"><text class="picker-txt">{{blockForm.start_date || '请选择'}}</text></picker></view>
+          <view class="form-row"><text>结束日期</text><picker mode="date" value="{{blockForm.end_date}}" bindchange="onBlockEndChange"><text class="picker-txt">{{blockForm.end_date || '单日可不填'}}</text></picker></view>
+          <view class="form-row"><text>封锁范围</text>
+            <radio-group bindchange="onBlockScopeChange">
+              <label class="radio-label"><radio value="photo_only" checked="{{blockForm.scope==='photo_only'}}"/>仅拍摄</label>
+              <label class="radio-label"><radio value="all" checked="{{blockForm.scope==='all'}}"/>全部(含器材)</label>
+            </radio-group>
+          </view>
+          <view class="form-row"><text>封锁事由</text><input placeholder="如：外出有事" value="{{blockForm.reason}}" bindinput="onBlockReasonInput"/></view>
+          <view class="modal-btns">
+            <button class="btn-outline half" bindtap="closeModal">取消</button>
+            <button class="btn-primary half" bindtap="saveBlock">确认封锁</button>
+          </view>
+        </view>
+      </view>
+
+      <!-- 器材锁定弹窗 -->
+      <view class="modal-mask" wx:if="{{showLockModal}}" bindtap="closeModal">
+        <view class="modal-box" catchtap="">
+          <view class="modal-title">锁定器材</view>
+          <view class="form-row"><text>开始日期</text><picker mode="date" value="{{lockForm.start_date}}" bindchange="onLockStartChange"><text class="picker-txt">{{lockForm.start_date || '请选择'}}</text></picker></view>
+          <view class="form-row"><text>结束日期</text><picker mode="date" value="{{lockForm.end_date}}" bindchange="onLockEndChange"><text class="picker-txt">{{lockForm.end_date || '单日可不填'}}</text></picker></view>
+          <view class="form-row col"><text>选择器材</text>
+            <view class="equip-check-list">
+              <view class="equip-check-item {{lockForm.equip_ids.indexOf(item._id)>=0 ? 'checked' : ''}}" wx:for="{{equipmentOptions}}" wx:key="_id" data-id="{{item._id}}" bindtap="toggleEquip">{{item.name}}</view>
+            </view>
+          </view>
+          <view class="form-row"><text>锁定备注</text><input placeholder="如：外出携带" value="{{lockForm.reason}}" bindinput="onLockReasonInput"/></view>
+          <view class="modal-btns">
+            <button class="btn-outline half" bindtap="closeModal">取消</button>
+            <button class="btn-primary half" bindtap="saveLock">确认锁定</button>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- ===== 套餐管理 ===== -->
+    <block wx:if="{{activeTab === 'package'}}">
+      <view class="list-header">
+        <text class="title">套餐列表</text>
+        <view class="add-btn" bindtap="addPackage">+ 新增</view>
+      </view>
+      <view class="mgr-list">
+        <view class="mgr-item" wx:for="{{packageList}}" wx:key="_id">
+          <image class="mgr-cover" src="{{item.cover_image}}" mode="aspectFill"></image>
+          <view class="mgr-info">
+            <view class="mgr-name">{{item.name}}</view>
+            <view class="mgr-meta">¥{{(item.price/100).toFixed(0)}} · {{item.duration}}h · {{item.status === 1 ? '上架' : '下架'}}</view>
+          </view>
+          <view class="mgr-actions">
+            <text class="act" data-id="{{item._id}}" bindtap="editPackage">编辑</text>
+            <text class="act danger" data-id="{{item._id}}" bindtap="deletePackage">删除</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- ===== 作品管理 ===== -->
+    <block wx:if="{{activeTab === 'work'}}">
+      <view class="list-header">
+        <text class="title">作品/作品集</text>
+        <view class="add-btn" bindtap="addWork">+ 新增作品</view>
+      </view>
+      <view class="mgr-list">
+        <view class="mgr-item" wx:for="{{workList}}" wx:key="_id">
+          <image class="mgr-cover" src="{{item.file_url}}" mode="aspectFill"></image>
+          <view class="mgr-info">
+            <view class="mgr-name">{{item.title || '未命名'}}</view>
+            <view class="mgr-meta">{{item.category}} · {{item.type === 'image' ? '图片' : '视频'}}</view>
+          </view>
+          <view class="mgr-actions">
+            <text class="act danger" data-id="{{item._id}}" bindtap="deleteWork">删除</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- ===== 器材管理 ===== -->
+    <block wx:if="{{activeTab === 'equipment'}}">
+      <view class="list-header">
+        <text class="title">器材列表</text>
+        <view class="add-btn" bindtap="addEquipment">+ 新增</view>
+      </view>
+      <view class="mgr-list">
+        <view class="mgr-item" wx:for="{{equipmentList}}" wx:key="_id">
+          <image class="mgr-cover" src="{{item.images[0]}}" mode="aspectFill"></image>
+          <view class="mgr-info">
+            <view class="mgr-name">{{item.name}}</view>
+            <view class="mgr-meta">¥{{(item.daily_rent/100).toFixed(0)}}/天 · 押金¥{{(item.deposit/100).toFixed(0)}}</view>
+          </view>
+          <view class="mgr-actions">
+            <text class="act" data-id="{{item._id}}" bindtap="editEquipment">编辑</text>
+            <text class="act danger" data-id="{{item._id}}" bindtap="deleteEquipment">删除</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- ===== 美姿管理 ===== -->
+    <block wx:if="{{activeTab === 'pose'}}">
+      <view class="list-header">
+        <text class="title">美姿素材</text>
+        <view class="add-btn" bindtap="addPose">+ 新增</view>
+      </view>
+      <view class="mgr-list">
+        <view class="mgr-item" wx:for="{{poseList}}" wx:key="_id">
+          <image class="mgr-cover" src="{{item.image_url}}" mode="aspectFill"></image>
+          <view class="mgr-info">
+            <view class="mgr-name">{{item.category}}</view>
+            <view class="mgr-meta">{{item.tip}}</view>
+          </view>
+          <view class="mgr-actions">
+            <text class="act danger" data-id="{{item._id}}" bindtap="deletePose">删除</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- ===== 订单管理 ===== -->
+    <block wx:if="{{activeTab === 'order'}}">
+      <view class="list-header">
+        <text class="title">全部订单</text>
+      </view>
+      <view class="mgr-list">
+        <view class="mgr-item order-item" wx:for="{{orderList}}" wx:key="_id">
+          <view class="mgr-info">
+            <view class="mgr-name">{{item.order_no}}</view>
+            <view class="mgr-meta">{{typeMap[item.order_type]}} · ¥{{(item.total_amount/100).toFixed(0)}} · {{statusMap[item.order_status]}}</view>
+            <view class="mgr-meta" wx:if="{{item.contact_name}}">{{item.contact_name}} {{item.contact_phone}}</view>
+          </view>
+          <view class="mgr-actions">
+            <text class="act" data-id="{{item._id}}" bindtap="viewOrder">详情</text>
+            <text class="act" data-id="{{item._id}}" data-status="in_progress" bindtap="updateOrderStatus" wx:if="{{item.order_status === 'paid'}}">开始</text>
+            <text class="act" data-id="{{item._id}}" data-status="completed" bindtap="updateOrderStatus" wx:if="{{item.order_status === 'in_progress'}}">完成</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
+  </view>
+</view>

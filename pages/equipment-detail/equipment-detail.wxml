@@ -1,0 +1,42 @@
+<!--pages/equipment-detail/equipment-detail.wxml 器材详情-->
+<view class="page-bg" style="{{pageStyle}}">
+  <!-- 图片轮播 -->
+  <swiper class="img-swiper" indicator-dots="{{true}}" circular="{{true}}"
+          indicator-color="rgba(0,0,0,0.3)" indicator-active-color="{{theme.primary}}">
+    <swiper-item wx:for="{{equip.images}}" wx:key="*this">
+      <image class="equip-img" src="{{item}}" mode="aspectFill"></image>
+    </swiper-item>
+  </swiper>
+
+  <!-- 基本信息 -->
+  <view class="info-card card">
+    <view class="equip-name">{{equip.name}}</view>
+    <view class="equip-model" wx:if="{{equip.brand || equip.model}}">{{equip.brand}} {{equip.model}}</view>
+    <view class="price-row">
+      <view class="price">¥{{equip.dailyRentYuan}}<text class="unit">/天</text></view>
+      <view class="deposit">押金 ¥{{equip.depositYuan}}</view>
+    </view>
+  </view>
+
+  <!-- 描述 -->
+  <view class="card" wx:if="{{equip.description}}">
+    <view class="section-title">器材介绍</view>
+    <view class="desc">{{equip.description}}</view>
+  </view>
+
+  <!-- 爱惜须知 -->
+  <view class="card notice-card">
+    <view class="notice-title">器材爱惜须知</view>
+    <view class="notice-text">{{equip.care_notice || '本器材是个人自用设备，租金偏低，请用心呵护，人为损坏需要按维修价赔偿。'}}</view>
+  </view>
+
+  <view style="height: 160rpx;"></view>
+
+  <!-- 底部按钮 -->
+  <view class="fixed-bottom-bar">
+    <view class="bar-btns">
+      <button class="btn-outline half" bindtap="goRentOnly">单独租用</button>
+      <button class="btn-primary half" bindtap="goRentWithPhoto">加入拍摄预约</button>
+    </view>
+  </view>
+</view>

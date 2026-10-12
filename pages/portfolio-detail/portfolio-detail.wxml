@@ -1,0 +1,29 @@
+<!--pages/portfolio-detail/portfolio-detail.wxml 作品集详情-->
+<view class="page-bg" style="{{pageStyle}}">
+  <!-- 顶部封面 -->
+  <view class="header">
+    <image class="cover" src="{{portfolio.cover_image}}" mode="aspectFill"></image>
+    <view class="header-info">
+      <view class="title">{{portfolio.title}}</view>
+      <view class="desc" wx:if="{{portfolio.description}}">{{portfolio.description}}</view>
+    </view>
+  </view>
+
+  <!-- 作品网格 -->
+  <view class="works-section">
+    <view class="section-title">全部作品 ({{works.length}})</view>
+    <view class="works-grid" wx:if="{{works.length > 0}}">
+      <view class="work-item" wx:for="{{works}}" wx:key="_id" data-id="{{item._id}}" bindtap="goWorkDetail">
+        <image class="work-img" src="{{item.thumbnail_url || item.file_url}}" mode="aspectFill"></image>
+      </view>
+    </view>
+    <view class="empty" wx:else>
+      <text>该作品集暂无作品</text>
+    </view>
+  </view>
+
+  <!-- 底部预约按钮 -->
+  <view class="fixed-bottom-bar">
+    <button class="btn-primary" bindtap="goBooking">预约此风格拍摄</button>
+  </view>
+</view>

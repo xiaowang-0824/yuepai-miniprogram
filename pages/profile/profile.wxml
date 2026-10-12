@@ -1,0 +1,43 @@
+<!--pages/profile/profile.wxml 我的-->
+<view class="page-bg" style="{{pageStyle}}">
+  <!-- 用户信息 -->
+  <view class="user-section" bindtap="login">
+    <image wx:if="{{userInfo.avatarUrl}}" class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
+    <view wx:else class="avatar avatar-placeholder">👤</view>
+    <view class="user-info">
+      <view class="nickname">{{userInfo.nickName || '点击登录'}}</view>
+      <view class="sub">{{userInfo.phone || '登录后查看订单'}}</view>
+    </view>
+  </view>
+
+  <!-- 管理员入口 -->
+  <view class="card admin-card" wx:if="{{isAdmin}}" bindtap="goAdmin">
+    <text class="admin-text">管理员后台</text>
+    <text class="arrow">›</text>
+  </view>
+
+  <!-- 功能入口 -->
+  <view class="menu-list card">
+    <view class="menu-item" bindtap="goOrders">
+      <text class="menu-icon">📋</text>
+      <text class="menu-text">我的订单</text>
+      <text class="arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goSettings">
+      <text class="menu-icon">🎨</text>
+      <text class="menu-text">主题设置</text>
+      <text class="arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="contactPhotographer">
+      <text class="menu-icon">💬</text>
+      <text class="menu-text">联系摄影师</text>
+      <text class="arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 底部 -->
+  <view class="footer">
+    <text class="desc">光影记事 · 把温柔的瞬间交给光影</text>
+    <text class="version">v1.0.0</text>
+  </view>
+</view>

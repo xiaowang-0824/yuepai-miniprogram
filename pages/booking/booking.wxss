@@ -1,0 +1,268 @@
+/* pages/booking/booking.wxss */
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 24rpx;
+}
+
+.section-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 24rpx;
+}
+
+.section-title-row .section-title {
+  margin-bottom: 0;
+}
+
+.optional-tag {
+  font-size: 20rpx;
+  color: var(--text-secondary);
+  background-color: var(--secondary);
+  padding: 4rpx 12rpx;
+  border-radius: 12rpx;
+}
+
+.skip-btn {
+  margin-left: auto;
+  font-size: 24rpx;
+  color: var(--primary);
+}
+
+/* 商品区 */
+.product-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid var(--border-color);
+  position: relative;
+}
+
+.product-item:last-of-type {
+  border-bottom: none;
+}
+
+.product-cover {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 12rpx;
+  flex-shrink: 0;
+}
+
+.product-info {
+  flex: 1;
+  margin-left: 20rpx;
+}
+
+.product-name {
+  font-size: 28rpx;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.product-price {
+  font-size: 26rpx;
+  color: var(--accent);
+  margin-top: 8rpx;
+}
+
+.product-meta {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  margin-top: 8rpx;
+}
+
+.product-meta .days {
+  margin-left: 12rpx;
+}
+
+.remove-btn {
+  width: 48rpx;
+  height: 48rpx;
+  line-height: 44rpx;
+  text-align: center;
+  font-size: 36rpx;
+  color: var(--text-secondary);
+  background-color: var(--secondary);
+  border-radius: 50%;
+}
+
+.add-btn {
+  padding: 24rpx 0;
+  text-align: center;
+  font-size: 26rpx;
+  border: 2rpx dashed var(--border-color);
+  border-radius: 12rpx;
+  margin-top: 16rpx;
+}
+
+.order-type-tag {
+  margin-top: 16rpx;
+}
+
+/* 表单 */
+.form-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid var(--border-color);
+}
+
+.form-item:last-child {
+  border-bottom: none;
+}
+
+.form-item.column {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.label {
+  width: 180rpx;
+  font-size: 28rpx;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.form-item.column .label {
+  width: auto;
+  margin-bottom: 16rpx;
+}
+
+.input {
+  flex: 1;
+  font-size: 28rpx;
+  color: var(--text-primary);
+}
+
+.form-item.column .input {
+  width: 100%;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 120rpx;
+  font-size: 28rpx;
+  color: var(--text-primary);
+  background-color: var(--background);
+  border-radius: 12rpx;
+  padding: 16rpx;
+  box-sizing: border-box;
+}
+
+.picker-value {
+  flex: 1;
+  font-size: 28rpx;
+  color: var(--text-primary);
+}
+
+.picker-value.placeholder {
+  color: var(--text-secondary);
+}
+
+.schedule-tip {
+  padding: 12rpx 0;
+  font-size: 24rpx;
+}
+
+/* 租期步进器 */
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+}
+
+.step-btn {
+  width: 56rpx;
+  height: 56rpx;
+  line-height: 52rpx;
+  text-align: center;
+  font-size: 36rpx;
+  background-color: var(--secondary);
+  border-radius: 50%;
+  color: var(--text-primary);
+}
+
+.step-num {
+  font-size: 30rpx;
+  min-width: 60rpx;
+  text-align: center;
+}
+
+/* 参考图 */
+.ref-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.ref-img {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 12rpx;
+}
+
+.ref-add {
+  width: 140rpx;
+  height: 140rpx;
+  border: 2rpx dashed var(--border-color);
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48rpx;
+  color: var(--text-secondary);
+}
+
+/* 金额 */
+.amount-card {
+  background-color: var(--card-bg);
+}
+
+.amount-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  padding: 12rpx 0;
+}
+
+.amount-row.total {
+  font-size: 32rpx;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.total-price {
+  color: var(--accent);
+  font-size: 36rpx;
+}
+
+/* 提交栏 */
+.submit-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.total-amount {
+  display: flex;
+  flex-direction: column;
+}
+
+.amount-label {
+  font-size: 22rpx;
+  color: var(--text-secondary);
+}
+
+.amount-value {
+  font-size: 40rpx;
+  font-weight: 700;
+}
+
+.submit-btn {
+  width: 360rpx;
+}

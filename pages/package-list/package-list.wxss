@@ -1,0 +1,105 @@
+/* pages/package-list/package-list.wxss */
+
+.cat-tabs {
+  display: flex;
+  white-space: nowrap;
+  padding: 24rpx 32rpx;
+  background-color: var(--card-bg);
+  border-bottom: 1rpx solid var(--border-color);
+}
+
+.cat-tab {
+  display: inline-block;
+  padding: 12rpx 32rpx;
+  margin-right: 16rpx;
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  border-radius: 32rpx;
+}
+
+.cat-tab.active {
+  background-color: var(--primary);
+  color: #FFFFFF;
+}
+
+.package-list {
+  padding: 24rpx 32rpx;
+}
+
+.package-card {
+  display: flex;
+  background-color: var(--card-bg);
+  border-radius: 20rpx;
+  overflow: hidden;
+  margin-bottom: 32rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.04);
+}
+
+.package-cover {
+  width: 240rpx;
+  height: 240rpx;
+  flex-shrink: 0;
+}
+
+.package-body {
+  flex: 1;
+  padding: 24rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.package-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.package-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.package-desc {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  margin-top: 12rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.package-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 12rpx;
+}
+
+.package-price {
+  font-size: 32rpx;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.package-meta {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.package-duration {
+  font-size: 22rpx;
+  color: var(--text-secondary);
+}
+
+.go-detail {
+  font-size: 22rpx;
+  color: var(--primary);
+}

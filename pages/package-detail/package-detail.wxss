@@ -1,0 +1,78 @@
+/* pages/package-detail/package-detail.wxss */
+
+.cover {
+  width: 100%;
+  height: 480rpx;
+}
+
+.info-card {
+  margin: -40rpx 32rpx 0;
+  position: relative;
+  z-index: 2;
+}
+
+.pkg-name {
+  font-size: 38rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.pkg-meta {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-top: 16rpx;
+  flex-wrap: wrap;
+}
+
+.pkg-duration {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
+
+.pkg-price {
+  margin-top: 20rpx;
+  font-size: 44rpx;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 20rpx;
+}
+
+.item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: var(--text-primary);
+}
+
+.dot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+}
+
+.sample-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.sample-img {
+  width: calc((100% - 16rpx) / 2);
+  height: 320rpx;
+  border-radius: 12rpx;
+}

@@ -1,0 +1,19 @@
+<!--pages/settings/settings.wxml 主题设置-->
+<view class="page-bg" style="{{pageStyle}}">
+  <view class="tip">选择你喜欢的配色风格，全局立即生效～</view>
+
+  <view class="theme-list">
+    <view class="theme-card {{currentKey === item.theme_key ? 'active' : ''}}" wx:for="{{themes}}" wx:key="theme_key"
+          data-key="{{item.theme_key}}" bindtap="selectTheme">
+      <!-- 色块预览 -->
+      <view class="color-preview">
+        <view class="color-block" style="background:{{item.primary}}"></view>
+        <view class="color-block" style="background:{{item.secondary}}"></view>
+        <view class="color-block" style="background:{{item.background}};border:1rpx solid #eee"></view>
+        <view class="color-block" style="background:{{item.accent}}"></view>
+      </view>
+      <view class="theme-name">{{item.name}}</view>
+      <view class="check" wx:if="{{currentKey === item.theme_key}}">✓</view>
+    </view>
+  </view>
+</view>

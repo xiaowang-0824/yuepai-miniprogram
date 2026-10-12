@@ -1,0 +1,28 @@
+<!--pages/portfolio/portfolio.wxml 作品集列表-->
+<view class="page-bg" style="{{pageStyle}}">
+  <!-- 分类标签 -->
+  <scroll-view class="cat-tabs" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
+    <view class="cat-tab {{currentCat === '' ? 'active' : ''}}" data-cat="" bindtap="switchCat">全部</view>
+    <view class="cat-tab {{currentCat === item ? 'active' : ''}}" wx:for="{{categories}}" wx:key="*this"
+          data-cat="{{item}}" bindtap="switchCat">{{item}}</view>
+  </scroll-view>
+
+  <!-- 作品集列表 -->
+  <view class="portfolio-list" wx:if="{{portfolios.length > 0}}">
+    <view class="portfolio-card" wx:for="{{portfolios}}" wx:key="_id" data-id="{{item._id}}" bindtap="goDetail">
+      <image class="portfolio-cover" src="{{item.cover_image}}" mode="aspectFill"></image>
+      <view class="portfolio-mask">
+        <view class="portfolio-title">{{item.title}}</view>
+        <view class="portfolio-count">{{item.works_count || 0}} 组作品</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:else>
+    <text>还没有作品集，敬请期待～</text>
+  </view>
+
+  <view class="load-more" wx:if="{{hasMore}}">
+    <text class="desc" bindtap="loadMore">加载更多</text>
+  </view>
+</view>

@@ -1,0 +1,23 @@
+<!--pages/pose/pose.wxml 美姿灵感-->
+<view class="page-bg" style="{{pageStyle}}">
+  <!-- 分类标签 -->
+  <scroll-view class="cat-tabs" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
+    <view class="cat-tab {{currentCat === '' ? 'active' : ''}}" data-cat="" bindtap="switchCat">全部</view>
+    <view class="cat-tab {{currentCat === item ? 'active' : ''}}" wx:for="{{categories}}" wx:key="*this"
+          data-cat="{{item}}" bindtap="switchCat">{{item}}</view>
+  </scroll-view>
+
+  <!-- 卡片流 -->
+  <view class="pose-list" wx:if="{{materials.length > 0}}">
+    <view class="pose-card" wx:for="{{materials}}" wx:key="_id" data-url="{{item.image_url}}" bindtap="previewImage">
+      <image class="pose-img" src="{{item.image_url}}" mode="aspectFill"></image>
+      <view class="pose-tip" wx:if="{{item.tip}}">
+        <text class="tip-text">{{item.tip}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:else>
+    <text>还没有美姿素材，敬请期待～</text>
+  </view>
+</view>

@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/portfolio/portfolio",
+    "pages/equipment-list/equipment-list",
+    "pages/profile/profile",
+    "pages/portfolio-detail/portfolio-detail",
+    "pages/work-detail/work-detail",
+    "pages/package-list/package-list",
+    "pages/package-detail/package-detail",
+    "pages/equipment-detail/equipment-detail",
+    "pages/pose/pose",
+    "pages/booking/booking",
+    "pages/my-orders/my-orders",
+    "pages/order-detail/order-detail",
+    "pages/admin/admin",
+    "pages/settings/settings"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F9F7F4",
+    "navigationBarTitleText": "光影记事",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F9F7F4"
+  },
+  "tabBar": {
+    "color": "#877E75",
+    "selectedColor": "#A89889",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/portfolio/portfolio",
+        "text": "作品集"
+      },
+      {
+        "pagePath": "pages/equipment-list/equipment-list",
+        "text": "器材租赁"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "booking",
+  "version": "1.0.0",
+  "description": "预约下单（档期校验+建单+软锁）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

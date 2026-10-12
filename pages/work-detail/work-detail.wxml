@@ -1,0 +1,20 @@
+<!--pages/work-detail/work-detail.wxml 作品全屏预览-->
+<view class="preview" style="{{pageStyle}}">
+  <!-- 返回按钮 -->
+  <view class="back-btn" bindtap="goBack">‹</view>
+
+  <!-- 作品展示 -->
+  <swiper class="swiper" current="{{currentIndex}}" bindchange="onSwiperChange">
+    <swiper-item wx:for="{{works}}" wx:key="_id">
+      <image wx:if="{{item.type === 'image'}}" class="media" src="{{item.file_url}}" mode="aspectFit" bindtap="toggleInfo"></image>
+      <video wx:else class="media" src="{{item.file_url}}" controls show-center-play-btn></video>
+    </swiper-item>
+  </swiper>
+
+  <!-- 底部信息 -->
+  <view class="info-bar {{showInfo ? '' : 'hidden'}}">
+    <view class="title" wx:if="{{currentWork.title}}">{{currentWork.title}}</view>
+    <view class="desc" wx:if="{{currentWork.description}}">{{currentWork.description}}</view>
+    <view class="counter">{{currentIndex + 1}} / {{works.length}}</view>
+  </view>
+</view>

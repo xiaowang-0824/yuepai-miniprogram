@@ -1,0 +1,34 @@
+<!--pages/package-list/package-list.wxml 套餐列表-->
+<view class="page-bg" style="{{pageStyle}}">
+  <!-- 分类标签 -->
+  <scroll-view class="cat-tabs" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
+    <view class="cat-tab {{currentType === '' ? 'active' : ''}}" data-type="" bindtap="switchType">全部</view>
+    <view class="cat-tab {{currentType === 'photo' ? 'active' : ''}}" data-type="photo" bindtap="switchType">摄影</view>
+    <view class="cat-tab {{currentType === 'video' ? 'active' : ''}}" data-type="video" bindtap="switchType">摄像</view>
+  </scroll-view>
+
+  <!-- 套餐列表 -->
+  <view class="package-list" wx:if="{{packages.length > 0}}">
+    <view class="package-card" wx:for="{{packages}}" wx:key="_id" data-id="{{item._id}}" bindtap="goDetail">
+      <image class="package-cover" src="{{item.cover_image}}" mode="aspectFill"></image>
+      <view class="package-body">
+        <view class="package-top">
+          <text class="package-name">{{item.name}}</text>
+          <view class="tag tag-primary">{{item.type === 'photo' ? '摄影' : '摄像'}}</view>
+        </view>
+        <view class="package-desc" wx:if="{{item.description}}">{{item.description}}</view>
+        <view class="package-bottom">
+          <view class="package-price">¥{{item.priceYuan}}</view>
+          <view class="package-meta">
+            <text class="package-duration">{{item.duration}}小时</text>
+            <text class="go-detail">查看详情 ›</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:else>
+    <text>暂无可预约的套餐，敬请期待～</text>
+  </view>
+</view>

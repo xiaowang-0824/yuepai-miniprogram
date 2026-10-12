@@ -1,0 +1,102 @@
+/* pages/profile/profile.wxss */
+
+.user-section {
+  display: flex;
+  align-items: center;
+  padding: 64rpx 32rpx;
+  background-color: var(--primary);
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(255, 255, 255, 0.5);
+  background-color: var(--secondary);
+}
+
+.avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56rpx;
+}
+
+.user-info {
+  margin-left: 28rpx;
+  color: #FFFFFF;
+}
+
+.nickname {
+  font-size: 36rpx;
+  font-weight: 600;
+}
+
+.sub {
+  margin-top: 8rpx;
+  font-size: 26rpx;
+  opacity: 0.9;
+}
+
+.admin-card {
+  margin: 24rpx 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--accent);
+  color: #FFFFFF;
+}
+
+.admin-text {
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.arrow {
+  font-size: 36rpx;
+  color: var(--text-secondary);
+}
+
+.admin-card .arrow {
+  color: #FFFFFF;
+}
+
+.menu-list {
+  margin: 0 32rpx;
+  padding: 0;
+  overflow: hidden;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 32rpx;
+  border-bottom: 1rpx solid var(--border-color);
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-icon {
+  font-size: 36rpx;
+  margin-right: 20rpx;
+}
+
+.menu-text {
+  flex: 1;
+  font-size: 30rpx;
+  color: var(--text-primary);
+}
+
+.footer {
+  text-align: center;
+  padding: 64rpx 0 48rpx;
+}
+
+.version {
+  display: block;
+  margin-top: 12rpx;
+  font-size: 22rpx;
+  color: var(--text-secondary);
+}

@@ -1,0 +1,179 @@
+<!--pages/booking/booking.wxml 预约下单-->
+<view class="page-bg" style="{{pageStyle}}">
+
+  <!-- 商品区 -->
+  <view class="card">
+    <view class="section-title">已选商品</view>
+
+    <!-- 拍摄套餐 -->
+    <view class="product-item" wx:if="{{selectedPackage._id}}">
+      <image class="product-cover" src="{{selectedPackage.cover_image}}" mode="aspectFill"></image>
+      <view class="product-info">
+        <view class="product-name">{{selectedPackage.name}}</view>
+        <view class="product-price">¥{{selectedPackage.priceYuan}}</view>
+      </view>
+      <view class="remove-btn" bindtap="removePackage" wx:if="{{selectedEquipment._id}}">×</view>
+    </view>
+
+    <!-- 套餐为空时，显示添加套餐入口（从器材页进来） -->
+    <view class="add-btn" wx:if="{{!selectedPackage._id}}" bindtap="addPackage">
+      <text style="color:{{theme.primary}}">+ 选择拍摄套餐</text>
+    </view>
+
+    <!-- 器材 -->
+    <view class="product-item" wx:for="{{selectedEquipmentList}}" wx:key="_id" wx:if="{{item._id}}">
+      <image class="product-cover" src="{{item.images[0]}}" mode="aspectFill"></image>
+      <view class="product-info">
+        <view class="product-name">{{item.name}}</view>
+        <view class="product-meta">
+          <text>¥{{item.dailyRentYuan}}/天</text>
+          <text class="days">×{{item.rentDays}}天</text>
+        </view>
+      </view>
+      <view class="remove-btn" data-id="{{item._id}}" bindtap="removeEquipment">×</view>
+    </view>
+
+    <!-- 添加器材入口 -->
+    <view class="add-btn" bindtap="addEquipment">
+      <text style="color:{{theme.primary}}">+ 添加租赁器材</text>
+    </view>
+
+    <!-- 订单类型提示 -->
+    <view class="order-type-tag" wx:if="{{orderType}}">
+      <text class="tag tag-primary">{{orderTypeText}}</text>
+    </view>
+  </view>
+
+  <!-- 预约信息 -->
+  <view class="card">
+    <view class="section-title">预约信息</view>
+
+    <!-- 拍摄日期 -->
+    <view class="form-item">
+      <text class="label">拍摄日期</text>
+      <picker mode="date" value="{{form.shooting_date}}" start="{{today}}" bindchange="onDateChange">
+        <view class="picker-value {{form.shooting_date ? '' : 'placeholder'}}">
+          {{form.shooting_date || '请选择拍摄日期'}}
+        </view>
+      </picker>
+    </view>
+    <view class="schedule-tip" wx:if="{{scheduleTip}}">
+      <text style="color:{{scheduleAvailable ? theme.primary : theme.accent}}">{{scheduleTip}}</text>
+    </view>
+
+    <!-- 器材租期（仅器材类） -->
+    <view class="form-item" wx:if="{{hasEquipment}}">
+      <text class="label">租赁天数</text>
+      <view class="stepper">
+        <view class="step-btn" bindtap="changeDays" data-delta="-1">-</view>
+        <text class="step-num">{{form.rent_days}}</text>
+        <view class="step-btn" bindtap="changeDays" data-delta="1">+</view>
+      </view>
+    </view>
+
+    <!-- 拍摄地点 -->
+    <view class="form-item">
+      <text class="label">拍摄地点</text>
+      <input class="input" placeholder="请输入拍摄地点" value="{{form.shooting_location}}"
+             data-field="shooting_location" bindinput="onInput" />
+    </view>
+
+    <!-- 联系人 -->
+    <view class="form-item">
+      <text class="label">联系人</text>
+      <input class="input" placeholder="您的称呼" value="{{form.contact_name}}"
+             data-field="contact_name" bindinput="onInput" />
+    </view>
+
+    <!-- 手机号 -->
+    <view class="form-item">
+      <text class="label">手机号</text>
+      <input class="input" type="number" maxlength="11" placeholder="便于联系沟通" value="{{form.contact_phone}}"
+             data-field="contact_phone" bindinput="onInput" />
+    </view>
+
+    <!-- 备注 -->
+    <view class="form-item column">
+      <text class="label">备注</text>
+      <textarea class="textarea" placeholder="有什么想提前说的都可以写在这里～" value="{{form.remark}}"
+                data-field="remark" bindinput="onInput"></textarea>
+    </view>
+  </view>
+
+  <!-- 拍摄风格问卷（可选） -->
+  <view class="card">
+    <view class="section-title-row">
+      <text class="section-title">拍摄风格问卷</text>
+      <text class="optional-tag">选填</text>
+      <text class="skip-btn" bindtap="toggleQuestionnaire">{{showQuestionnaire ? '收起' : '展开填写'}}</text>
+    </view>
+
+    <block wx:if="{{showQuestionnaire}}">
+      <view class="form-item column">
+        <text class="label">期待照片氛围</text>
+        <input class="input" placeholder="比如：温柔、日系、复古..." value="{{questionnaire.atmosphere}}"
+               data-field="atmosphere" bindinput="onQInput" />
+      </view>
+      <view class="form-item column">
+        <text class="label">本次拍摄想保留的感觉</text>
+        <input class="input" placeholder="比如：自然放松、元气满满..." value="{{questionnaire.feeling}}"
+               data-field="feeling" bindinput="onQInput" />
+      </view>
+      <view class="form-item column">
+        <text class="label">介意的外貌细节</text>
+        <input class="input" placeholder="比如：左脸不上镜、想遮法令纹..." value="{{questionnaire.appearance_concerns}}"
+               data-field="appearance_concerns" bindinput="onQInput" />
+      </view>
+      <view class="form-item column">
+        <text class="label">参考图上传</text>
+        <view class="ref-images">
+          <image wx:for="{{questionnaire.reference_images}}" wx:key="*this" class="ref-img" src="{{item}}" mode="aspectFill"></image>
+          <view class="ref-add" bindtap="uploadRefImage" wx:if="{{questionnaire.reference_images.length < 6}}">+</view>
+        </view>
+      </view>
+      <view class="form-item column">
+        <text class="label">想和摄影师说的心里话</text>
+        <textarea class="textarea" placeholder="放心说，只有摄影师能看到～" value="{{questionnaire.message}}"
+                  data-field="message" bindinput="onQInput"></textarea>
+      </view>
+    </block>
+  </view>
+
+  <!-- 金额 -->
+  <view class="card amount-card">
+    <view class="amount-row">
+      <text>拍摄套餐</text>
+      <text wx:if="{{selectedPackage._id}}">¥{{selectedPackage.priceYuan}}</text>
+      <text wx:else>—</text>
+    </view>
+    <view class="amount-row" wx:if="{{hasEquipment}}">
+      <text>器材租赁</text>
+      <text>¥{{equipmentAmountYuan}}</text>
+    </view>
+    <view class="amount-row" wx:if="{{hasEquipment}}">
+      <text>器材押金</text>
+      <text>¥{{depositAmountYuan}}</text>
+    </view>
+    <view class="divider"></view>
+    <view class="amount-row total">
+      <text>合计</text>
+      <text class="total-price">¥{{totalAmountYuan}}</text>
+    </view>
+  </view>
+
+  <view style="height: 160rpx;"></view>
+
+  <!-- 底部提交 -->
+  <view class="fixed-bottom-bar">
+    <view class="submit-row">
+      <view class="total-amount">
+        <text class="amount-label">合计</text>
+        <text class="amount-value" style="color:{{theme.accent}}">¥{{totalAmountYuan}}</text>
+      </view>
+      <button class="btn-primary submit-btn" bindtap="submitOrder" disabled="{{submitting}}">
+        {{submitting ? '提交中...' : '提交预约并支付'}}
+      </button>
+    </view>
+  </view>
+
+</view>

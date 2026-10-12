@@ -1,0 +1,80 @@
+<!--pages/index/index.wxml 首页-->
+<view class="page-bg" style="{{pageStyle}}">
+
+  <!-- 顶部品牌区 -->
+  <view class="brand-section">
+    <view class="brand-name">光影记事</view>
+    <view class="brand-slogan">把温柔的瞬间，交给光影</view>
+  </view>
+
+  <!-- Banner 轮播 -->
+  <swiper class="banner" indicator-dots="{{true}}" autoplay="{{true}}" interval="4000" circular="{{true}}"
+          indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#FFFFFF">
+    <block wx:for="{{banners}}" wx:key="_id">
+      <swiper-item>
+        <image class="banner-img" src="{{item.cover}}" mode="aspectFill"></image>
+        <view class="banner-title">{{item.title}}</view>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <!-- 快捷入口宫格 -->
+  <view class="quick-grid">
+    <view class="quick-item" bindtap="goPackageList">
+      <view class="quick-icon" style="background:{{theme.primary}}">📷</view>
+      <view class="quick-text">套餐预约</view>
+    </view>
+    <view class="quick-item" bindtap="goEquipmentList">
+      <view class="quick-icon" style="background:{{theme.primary}}">🎥</view>
+      <view class="quick-text">器材租赁</view>
+    </view>
+    <view class="quick-item" bindtap="goPortfolio">
+      <view class="quick-icon" style="background:{{theme.primary}}">🎞️</view>
+      <view class="quick-text">作品集</view>
+    </view>
+    <view class="quick-item" bindtap="goPose">
+      <view class="quick-icon" style="background:{{theme.primary}}">💡</view>
+      <view class="quick-text">美姿灵感</view>
+    </view>
+  </view>
+
+  <!-- 热门套餐 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="title">热门套餐</text>
+      <text class="more" bindtap="goPackageList">查看全部 ›</text>
+    </view>
+    <scroll-view class="package-scroll" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
+      <view class="package-card" wx:for="{{hotPackages}}" wx:key="_id" data-id="{{item._id}}" bindtap="goPackageDetail">
+        <image class="package-cover" src="{{item.cover_image}}" mode="aspectFill"></image>
+        <view class="package-info">
+          <view class="package-name">{{item.name}}</view>
+          <view class="package-meta">
+            <text class="package-price">¥{{item.priceYuan}}</text>
+            <text class="package-duration">{{item.duration}}小时</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 精选作品 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="title">精选作品</text>
+      <text class="more" bindtap="goPortfolio">更多 ›</text>
+    </view>
+    <view class="works-grid">
+      <view class="work-item" wx:for="{{featuredWorks}}" wx:key="_id" data-id="{{item._id}}" bindtap="goWorkDetail">
+        <image class="work-img" src="{{item.file_url}}" mode="aspectFill"></image>
+        <view class="work-title" wx:if="{{item.title}}">{{item.title}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部留白 -->
+  <view class="footer">
+    <text class="desc">— 光影记事 · 用镜头留住温柔 —</text>
+  </view>
+
+</view>
